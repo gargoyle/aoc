@@ -2,14 +2,16 @@
 
 $input = file('day1_input.txt');
 $numIncreases = 0;
-for ($i = 0; $i < count($input); $i++) {
-    if (($i > 0) && ($input[$i] > $input[$i-1])) {
+
+for ($i = 1; $i < count($input); $i++) {
+    if ($input[$i] > $input[$i-1]) {
         $numIncreases++;
     }
 }
 
 $numWindowIncreases = 0;
 $previousSum = null;
+
 for ($i = 2; $i < count($input); $i++) {
     $sum = $input[$i] + $input[$i-1] + $input[$i-2];
     

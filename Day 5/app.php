@@ -9,12 +9,14 @@ spl_autoload_register(function ($className) {
 
 $begin = microtime(true);
 
-$inputData = file('input.txt');
+$inputData = file('test_input.txt');
 $intersects = [];
 $dangerPoints = [];
 
 foreach ($inputData as $raw) {
     foreach (Line::fromVentData($raw)->points() as list($x, $y)) {
+        echo "$x,$y ";
+        
         if (!isset($intersects[$x][$y])) {
             $intersects[$x][$y] = 0;
         }
@@ -24,6 +26,7 @@ foreach ($inputData as $raw) {
             $dangerPoints[] = $x.':'.$y;
         }
     }
+    echo "\n";
 }
 
 $dangerPoints = array_unique($dangerPoints);

@@ -24,18 +24,30 @@ public class Line
     
     public List<Point> points() {
         var points = new ArrayList<Point>();
-        
         if (startX == endX) {
-            IntStream.range(startY, endY+1).forEachOrdered(y -> {
-                points.add(new Point(startX, y));
-            });
+            if (startY < endY) {
+                IntStream.rangeClosed(startY, endY).forEachOrdered(y -> {
+                    points.add(new Point(startX, y));
+                });
+            } else {
+                IntStream.rangeClosed(endY, startY).forEachOrdered(y -> {
+                    points.add(new Point(startX, y));
+                });
+            }
         } else {
             var slope = (endY - startY)/(endX - startX);
             var icept = startY - (slope * startX);
-            IntStream.range(startX, endX+1).forEachOrdered(x -> {
-                var y = (slope*x) + icept;
-                points.add(new Point(x, y));
-            });
+            if (startX < endX) {
+                IntStream.rangeClosed(startX, endX).forEachOrdered(x -> {
+                    var y = (slope*x) + icept;
+                    points.add(new Point(x, y));
+                });
+            } else {
+                IntStream.rangeClosed(endX, startX).forEachOrdered(x -> {
+                    var y = (slope*x) + icept;
+                    points.add(new Point(x, y));
+                });
+            }
         }
         
         return points;

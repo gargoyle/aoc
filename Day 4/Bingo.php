@@ -34,27 +34,27 @@ class Bingo {
         
         foreach ($this->callSequence as $round => $value) {
         
-            printf("Round %s\n", $round);
+            //printf("Round %s", $round);
             $this->call($value);
-            
-            foreach ($this->cards as $cardNum => $card) {
-                
-            }
+            usleep(170000);
+            echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+                    echo $this->cards[68];
+                    echo $this->cards[81];
         }
         
         echo "\n";
         echo " !! Game complete !! \n";
-        
-        echo "First winning card was: \n";
-        echo $this->firstWinningCard;
-        
-        echo "Last Winning card was: \n";
-        echo $this->lastWinningCard;        
+//        
+//        echo "First winning card was: \n";
+//        echo $this->firstWinningCard;
+//        
+//        echo "Last Winning card was: \n";
+//        echo $this->lastWinningCard;        
     }
 
     private function call(int $value): void
     {
-        printf("Caller: %s\n", $value);
+        //printf("Caller: %s\n", $value);
         for ($i = 0; $i < count($this->cards); $i++) {
             $card = $this->cards[$i];
             
@@ -64,12 +64,12 @@ class Bingo {
             if ($card->hasWon()) {
                 if ($this->firstWinningCard == null) {
                     $this->firstWinningCard = $card;
-                    echo "Card " . $i . " HOUSE (1st)";
+                    //echo "Card " . $i . " HOUSE (1st)";
                 }
 
                 if ($this->allCardsWon() && ($this->lastWinningCard == null)) {
                     $this->lastWinningCard = $card;
-                    echo "Card " . $i . " HOUSE (last)";
+                    //echo "Card " . $i . " HOUSE (last)";
                 }
             }
         }

@@ -1,6 +1,6 @@
 <?php
-const TEST_INPUT = 'day3_test_input.txt';
-const REAL_INPUT = 'day3_input.txt';
+const TEST_INPUT = 'test_input.txt';
+const REAL_INPUT = 'input.txt';
 
 const TEST_MODE = false;
 

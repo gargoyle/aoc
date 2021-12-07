@@ -6,7 +6,7 @@
  * @author paul
  */
 class DataLoader {
-    private const DATAFILE = "day4_input.txt";
+    private const DATAFILE = "input.txt";
     
     private array $caller;
     private array $cards;

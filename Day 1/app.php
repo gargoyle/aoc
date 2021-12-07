@@ -1,6 +1,6 @@
 <?php
 
-$input = file('day1_input.txt');
+$input = file('input.txt');
 $numIncreases = 0;
 
 for ($i = 1; $i < count($input); $i++) {

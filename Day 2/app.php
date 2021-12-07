@@ -1,6 +1,6 @@
 <?php
 
-$input = file('day2_input.txt');
+$input = file('input.txt');
 
 $hPos = 0;
 $depth = 0;
@@ -48,5 +48,5 @@ for ($i = 0; $i < count($input); $i++) {
     
 }
 
-printf("Answer 1: depth = %d, position = %d (%d)\n",
+printf("Answer 2: depth = %d, position = %d (%d)\n",
         $depth, $hPos, ($hPos * $depth));

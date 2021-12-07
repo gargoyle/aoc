@@ -11,16 +11,25 @@
  * 91 46 55 86  6
  */
 class Card {
+
+    private int $id;
+
     const ROWS = 5;
     const COLS = 5;
     
     private array $squares;
     private ?int $winningCall;
     
-    public function __construct(array $data) {
+    public function __construct(array $data, int $id = 0) {
+        $this->id = $id;
         $this->squares = [];
         $this->winningCall = null;
         $this->loadData($data);
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     private function loadData(array $data): void {

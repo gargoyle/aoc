@@ -13,7 +13,6 @@ class Main extends \Base
     public function one(): string {
         
         foreach ($this->lines as $line) {
-            echo $line . PHP_EOL;
             list($label1, $label2) = explode('-', $line);
             if (!isset($this->caves[$label1])) {
                 $this->caves[$label1] = new Cave($label1);
@@ -25,17 +24,18 @@ class Main extends \Base
         }
         
         $routes = [];
-        $routes = $this->caves['start']->visit();
-        print_r($routes);
-        foreach ($routes as $route) {
-            printf("%s\n", implode(",", $route));
-        }
+        $this->caves['start']->visit([], $routes);
+//        print_r($routes);
+//        foreach ($routes as $route) {
+//            printf("%s\n", $route);
+//        }
+//        echo PHP_EOL;
+        
         return count($routes);
     }
 
     public function two(): string {
         foreach ($this->lines as $line) {
-            echo $line . PHP_EOL;
             list($label1, $label2) = explode('-', $line);
             if (!isset($this->caves[$label1])) {
                 $this->caves[$label1] = new Cave($label1);
@@ -47,10 +47,7 @@ class Main extends \Base
         }
         
         $routes = [];
-        $routes = $this->caves['start']->visit();
-        foreach ($routes as $route) {
-            $stringRoutes[] = implode(",", $route);
-        }
+        $this->caves['start']->visit([], $routes, true);
         return count($routes);
     }
 

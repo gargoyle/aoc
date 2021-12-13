@@ -30,8 +30,8 @@ $mainClassname = sprintf("Day%s\Main", DAY);
 $main = new $mainClassname($lines);
 
 printf("\n--- Day %s: %s ---\n\n", DAY, $main->title());
-printf("Answer 1: %d\n", $main->one());
-printf("Answer 2: %d\n", $main->two());
+printf("Answer 1: %s\n", $main->one());
+printf("Answer 2: %s\n", $main->two());
 
 printf("\nRuntime = %f seconds\n\n", 
         (microtime(true) - START_TIME)

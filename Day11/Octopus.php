@@ -16,6 +16,7 @@ class Octopus {
     {
         $this->energy = $energy;
         $this->flashCount = 0;
+        $this->flashing = false;
     }
     
     public function setNeighbours(array $neighbours)
@@ -36,6 +37,11 @@ class Octopus {
         if (($this->energy > 9) && (!$this->flashing)) {
             $this->flash();
         }
+    }
+    
+    public function didFlash(): bool
+    {
+        return $this->flashing;
     }
     
     public function cleanUp(): void

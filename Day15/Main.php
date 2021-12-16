@@ -5,6 +5,7 @@ namespace Day15;
 class Main extends \Base
 {
     private $maze = [];
+    private $renderEnabled = false;
     
     public function title(): string {
         return "Chiton";
@@ -26,6 +27,23 @@ class Main extends \Base
         }
 //        print_r($n);
         return $n;
+    }
+    
+    
+    public function render()
+    {
+        if (!$this->renderEnabled){ return; }
+        
+        $xMax = strlen($this->lines[0]) * 5;
+        $yMax = count($this->lines) * 5;
+        
+        echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+        for ($y = 0; $y < $yMax; $y++) {
+            for ($x = 0; $x < $xMax; $x++) {
+                echo $this->maze["$x:$y"];
+            }
+            echo "\n";
+        }
     }
     
     public function one(): string {
@@ -78,14 +96,20 @@ class Main extends \Base
     }
     
     private function walkBack(Node $n, array $path): array {
+        $n->walked = true;
         $path[] = $n->cost;
         if ($n->parent !== null) {
+            $this->render();
+            usleep(1000*60);
             return $this->walkBack($n->parent, $path);
         }
+        $this->render();
+        usleep(1000*60);
         return $path;
     }
     
     public function two(): string {
+        $this->renderEnabled = true;
         $this->maze = [];
         $x = 0;
         $y = 0;
@@ -144,6 +168,9 @@ class Main extends \Base
                     });
                 }
             }
+            
+            $this->render();
+            usleep(1000*60);
         }
         
         $path = $this->walkBack($end, []);

@@ -1,1 +1,2 @@
 **/*.class
+.php-cs-fixer.cache

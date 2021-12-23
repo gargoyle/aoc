@@ -4,7 +4,6 @@ namespace Day10;
 
 class Main extends \Base
 {
-    
     private $chunkCodes = [
         '(' => ')',
         '[' => ']',
@@ -24,11 +23,13 @@ class Main extends \Base
         '>' => 4
     ];
 
-    public function title(): string {
+    public function title(): string
+    {
         return "Syntax Scoring";
     }
 
-    public function one(): string {
+    public function one(): string
+    {
         $openers = array_keys($this->chunkCodes);
         $closers = array_values($this->chunkCodes);
 
@@ -61,7 +62,8 @@ class Main extends \Base
         return (string)$score;
     }
 
-    public function two(): string {
+    public function two(): string
+    {
         $openers = array_keys($this->chunkCodes);
         $closers = array_values($this->chunkCodes);
 
@@ -115,7 +117,4 @@ class Main extends \Base
 
         return (string)$autocompleteScores[$midIndex];
     }
-
-
-
 }

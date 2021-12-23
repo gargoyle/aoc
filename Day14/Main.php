@@ -5,27 +5,31 @@ namespace Day14;
 class Main extends \Base
 {
     private $caves = [];
-    
-    public function title(): string {
+
+    public function title(): string
+    {
         return "Extended Polymerization";
     }
 
-    private function run(int $it): string {
+    private function run(int $it): string
+    {
         $x = $this->lines;
         $template = array_shift($x);
-        echo $template . "\n";
         $pairs = [];
         for ($i = 0; $i < (strlen($template)-1); $i++) {
             $pair = $template[$i] . $template[$i+1];
-            if (!isset($pairs[$pair])) { $pairs[$pair] = 0; }
+            if (!isset($pairs[$pair])) {
+                $pairs[$pair] = 0;
+            }
             $pairs[$pair] += 1;
         }
-        print_r($pairs);
-        
+
         $rules = [];
         foreach ($x as $line) {
-            if (empty($line)) { continue; }
-            
+            if (empty($line)) {
+                continue;
+            }
+
             list($pair, $insert) = explode(" -> ", $line);
             $rules[$pair] = $insert;
         }
@@ -39,44 +43,51 @@ class Main extends \Base
                         $newPairs[$pair[0].$insert] = 0;
                     }
                     $newPairs[$pair[0].$insert] += $value;
-                    
+
                     if (!isset($newPairs[$insert . $pair[1]])) {
                         $newPairs[$insert . $pair[1]] = 0;
                     }
                     $newPairs[$insert . $pair[1]] += $value;
                 } else {
-                    if (!isset($newPairs[$pair])) { $newPairs[$pair] = 0; }
+                    if (!isset($newPairs[$pair])) {
+                        $newPairs[$pair] = 0;
+                    }
                     $newPairs[$pair] += $value;
                 }
             }
             $pairs = $newPairs;
-//            print_r($pairs);
         }
-        
+
         $elementCountsA = [];
         $elementCountsB = [];
         foreach ($pairs as $pair => $value) {
-            if (!isset($elementCountsA[$pair[0]])) { $elementCountsA[$pair[0]] = 0; }
-            if (!isset($elementCountsB[$pair[1]])) { $elementCountsB[$pair[1]] = 0; }
+            if (!isset($elementCountsA[$pair[0]])) {
+                $elementCountsA[$pair[0]] = 0;
+            }
+            if (!isset($elementCountsB[$pair[1]])) {
+                $elementCountsB[$pair[1]] = 0;
+            }
             $elementCountsA[$pair[0]] += $value;
             $elementCountsB[$pair[1]] += $value;
         }
-        
+
         $merged = [];
         foreach (array_keys($elementCountsA) as $key) {
             $merged[] = max([$elementCountsA[$key], $elementCountsB[$key]]);
         }
         $max = max(array_values($merged));
         $min = min(array_values($merged));
-        
-        return sprintf("min: %s, max: %s, answer: %s", $min, $max, ($max - $min));
+
+        return ($max - $min);
     }
 
-    public function one(): string {
-         return $this->run(10);
+    public function one(): string
+    {
+        return $this->run(10);
     }
-    
-    public function two(): string {
+
+    public function two(): string
+    {
         return $this->run(40);
     }
 }

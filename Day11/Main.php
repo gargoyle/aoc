@@ -6,25 +6,27 @@ class Main extends \Base
 {
     private array $octo = [];
     private array $flatList = [];
-    
-    public function title(): string {
+
+    public function title(): string
+    {
         return "Dumbo Octopus";
     }
 
-    public function one(): string {
+    public function one(): string
+    {
         for ($r = 0; $r < count($this->lines); $r++) {
             for ($c = 0; $c < strlen($this->lines[$r]); $c++) {
                 $this->octo[$r][$c] = new Octopus($this->lines[$r][$c]);
             }
         }
-        
+
         for ($r = 0; $r < count($this->lines); $r++) {
             for ($c = 0; $c < strlen($this->lines[$r]); $c++) {
                 $this->octo[$r][$c]->setNeighbours($this->findNeighbours($r, $c));
                 $this->flatList[] = $this->octo[$r][$c];
             }
         }
-        
+
         for ($i = 0; $i < 100; $i++) {
             foreach ($this->flatList as $o) {
                 $o->inc();
@@ -36,12 +38,12 @@ class Main extends \Base
                 $o->cleanUp();
             }
         }
-        
+
         $flashCount = 0;
         foreach ($this->flatList as $o) {
             $flashCount += $o->getFlashCount();
         }
-        
+
         return $flashCount;
     }
 
@@ -57,21 +59,22 @@ class Main extends \Base
         }
         return $list;
     }
-    
-    public function two(): string {
+
+    public function two(): string
+    {
         for ($r = 0; $r < count($this->lines); $r++) {
             for ($c = 0; $c < strlen($this->lines[$r]); $c++) {
                 $this->octo[$r][$c] = new Octopus($this->lines[$r][$c]);
             }
         }
-        
+
         for ($r = 0; $r < count($this->lines); $r++) {
             for ($c = 0; $c < strlen($this->lines[$r]); $c++) {
                 $this->octo[$r][$c]->setNeighbours($this->findNeighbours($r, $c));
                 $this->flatList[] = $this->octo[$r][$c];
             }
         }
-        
+
         $i = 0;
         do {
             $i++;
@@ -91,8 +94,7 @@ class Main extends \Base
                 $o->cleanUp();
             }
         } while (!$allFlashed);
-        
+
         return $i;
     }
-
 }

@@ -4,19 +4,21 @@ namespace Day16;
 
 class Main extends \Base
 {
-    public function title(): string {
+    public function title(): string
+    {
         return "Packet Decoder";
     }
 
     public function popBits(&$bits, int $length): string
-    {   
+    {
         $popped = substr($bits, 0, $length);
         $bits = substr($bits, $length);
-        
+
         return $popped;
     }
-    
-    public function one(): string {
+
+    public function one(): string
+    {
         $hexBytes = str_split($this->lines[0]);
         $bits = '';
         foreach ($hexBytes as $byte) {
@@ -28,8 +30,9 @@ class Main extends \Base
         $versionSum = $this->sumPacketVersions($packets);
         return $versionSum;
     }
-    
-    public function two(): string {
+
+    public function two(): string
+    {
         $hexBytes = str_split($this->lines[0]);
         $bits = '';
         foreach ($hexBytes as $byte) {
@@ -45,7 +48,7 @@ class Main extends \Base
     public function sumPacketVersions(array $packets): int
     {
         $versionSum = 0;
-        foreach ($packets as $packet) { 
+        foreach ($packets as $packet) {
             $versionSum += $packet->ver;
             if (is_array($packet->payload)) {
                 $versionSum+= $this->sumPacketVersions($packet->payload);
@@ -53,8 +56,8 @@ class Main extends \Base
         }
         return $versionSum;
     }
-    
-    
+
+
     public function decodePayload(string &$bits, $limit = 0): array
     {
         $packets = [];
@@ -69,16 +72,16 @@ class Main extends \Base
                 // not enough for a valid packet, must be end of transmission padding.
                 break;
             }
-            
+
             $packet = new Packet();
             $packet->ver = bindec($this->popBits($bits, 3));
             $packet->type = bindec($this->popBits($bits, 3));
-            
+
             switch ($packet->type) {
                 case 4:
                     // Value packet
                     $buffer = '';
-                    do { 
+                    do {
                         $chunk = $this->popBits($bits, 5);
                         $buffer .= substr($chunk, 1);
                     } while ($chunk[0] !== "0");
@@ -97,7 +100,7 @@ class Main extends \Base
                     }
                     break;
             }
-            
+
             if ($packet !== null) {
                 $packets[] = $packet;
             }

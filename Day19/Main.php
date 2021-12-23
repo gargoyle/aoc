@@ -1,21 +1,22 @@
 <?php
 
-namespace Day16;
+namespace Day19;
 
 class Main extends \Base
 {
     public function title(): string
     {
-        return "Packet Decoder";
+        return "Beacon Scanner";
     }
+
 
     public function one(): string
     {
-        return "One";
+        return "??";
     }
 
     public function two(): string
     {
-        return "Two";
+        return "??";
     }
 }

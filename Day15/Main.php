@@ -104,11 +104,11 @@ class Main extends \Base
         $path[] = $n->cost;
         if ($n->parent !== null) {
             $this->render();
-            usleep(1000*60);
+            //usleep(1000*6);
             return $this->walkBack($n->parent, $path);
         }
         $this->render();
-        usleep(1000*60);
+        usleep(1000*6);
         return $path;
     }
 
@@ -177,7 +177,7 @@ class Main extends \Base
 
             if ($this->renderEnabled) {
                 $this->render();
-                usleep(1000*60);
+                usleep(1000*10);
             }
         }
 

@@ -5,8 +5,8 @@ spl_autoload_register(function ($className) {
     $base = __DIR__ . '/';
 
     $file = $base
-          . str_replace('\\', '/', $className)
-          . '.php';
+            . str_replace('\\', '/', $className)
+            . '.php';
 
     if (file_exists($file)) {
         require_once $file;
@@ -17,23 +17,20 @@ define('START_TIME', microtime(true));
 
 $opts = getopt("t");
 define('TEST_MODE', isset($opts['t']));
-define('DAY', $argv[TEST_MODE ? 2 : 1] ?? 1);
-define('YEAR', 2022);
+define('MAXDAY', $argv[TEST_MODE ? 2 : 1] ?? date('d'));
+define('YEAR', date('Y'));
 
-//$filename = sprintf("Year%04d/Day%02d/", YEAR, DAY);
-//$filename .= (TEST_MODE ? "test_" : "") . "input.txt";
-//$lines = file($filename);
-//array_walk($lines, function (&$v) {
-//    $v = trim($v);
-//});
+for ($d = 1; $d <= MAXDAY; $d++) {
 
-$mainClass = sprintf("Year%s\Day%02s\Main", YEAR, DAY);
+    $mainClass = sprintf("Year%s\Day%02s\Main", YEAR, $d);
 
-printf("\n--- %s, Day %s: %s ---\n\n", YEAR, DAY, $mainClass::title());
-printf("Answer 1: %s\n", $mainClass::TaskOne());
-printf("Answer 2: %s\n", $mainClass::TaskTwo());
+    $title = sprintf("\n%s, Day %s: %s", YEAR, $d, $mainClass::title());
+    printf("%s\n%s\n", $title, str_pad("", strlen($title), "-"));
+    printf("\tPart One: %s\n", $mainClass::TaskOne());
+    printf("\tPart Two: %s\n", $mainClass::TaskTwo());
+}
 
 printf(
-    "\nRuntime = %f seconds\n\n",
-    (microtime(true) - START_TIME)
+        "\nRuntime = %f seconds\n\n",
+        (microtime(true) - START_TIME)
 );

@@ -16,4 +16,15 @@ class InputReader
         });
         return $lines;
     }
+    
+    public static function unbufferedCleanedLines(string $directory): \Generator
+    {
+        $filename = $directory . DIRECTORY_SEPARATOR . self::FILENAME;
+        $fp = fopen($filename, 'r');
+        
+        if ($fp === false) { die("Failed to open input file: " . $filename); }
+        while ($line = fgets($fp)) {
+            yield trim($line);
+        }
+    }
 }

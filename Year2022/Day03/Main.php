@@ -13,12 +13,7 @@ class Main
 
     public static function TaskOne(): string
     {
-        $filename = $filename = __DIR__ 
-                . DIRECTORY_SEPARATOR 
-                . (TEST_MODE ? "test_" : "") 
-                . "input.txt";
-        
-        $lines = InputReader::cleanedLines($filename);
+        $lines = InputReader::cleanedLines(__DIR__);
         
         $priSum = 0;
         foreach ($lines as $line) {
@@ -32,12 +27,7 @@ class Main
     
     public static function TaskTwo(): string
     {
-        $filename = $filename = __DIR__ 
-                . DIRECTORY_SEPARATOR 
-                . (TEST_MODE ? "test_" : "") 
-                . "input.txt";
-
-        $lines = InputReader::cleanedLines($filename);
+        $lines = InputReader::cleanedLines(__DIR__);
         
         $priSum = 0;
         for ($i = 0; $i < count($lines) - 2; $i += 3) {

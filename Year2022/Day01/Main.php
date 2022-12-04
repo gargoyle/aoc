@@ -2,6 +2,8 @@
 
 namespace Year2022\Day01;
 
+use Year2022\Lib\InputReader;
+
 class Main
 {
     public static function Title(): string
@@ -9,19 +11,9 @@ class Main
         return "Calorie Counting";
     }
     
-    private static function cleanedLines(): array
-    {
-        $filename = __DIR__ . DIRECTORY_SEPARATOR . (TEST_MODE ? "test_" : "") . "input.txt";
-        $lines = file($filename);
-        array_walk($lines, function (&$v) {
-            $v = trim($v);
-        });
-        return $lines;
-    }
-    
     private static function loadElfCalories(): array
     {
-        $lines = self::cleanedLines();
+        $lines = InputReader::cleanedLines(__DIR__);
         
         $elfCalories = [];
         $elfNum = 1;

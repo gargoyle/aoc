@@ -4,8 +4,12 @@ namespace Year2022\Lib;
 
 class InputReader
 {
-    public static function cleanedLines(string $filename): array
+    const FILENAME = TEST_MODE ? 'test_input.txt' : 'input.txt';
+    
+    public static function cleanedLines(string $directory): array
     {
+        $filename = $directory . DIRECTORY_SEPARATOR . self::FILENAME;
+        
         $lines = file($filename);
         array_walk($lines, function (&$v) {
             $v = trim($v);

@@ -2,6 +2,8 @@
 
 namespace Year2022\Day02;
 
+use Year2022\Lib\InputReader;
+
 class Main
 {
     const LOSS_SCORE = 0;
@@ -17,16 +19,6 @@ class Main
     public static function Title(): string
     {
         return "Rock Paper Scissors";
-    }
-    
-    private static function cleanedLines(): array
-    {
-        $filename = __DIR__ . DIRECTORY_SEPARATOR . (TEST_MODE ? "test_" : "") . "input.txt";
-        $lines = file($filename);
-        array_walk($lines, function (&$v) {
-            $v = trim($v);
-        });
-        return $lines;
     }
     
     private static function roundScore($them, $us): int
@@ -73,7 +65,7 @@ class Main
             'Z' => 'SCISSORS',
         ];
         
-        foreach (self::cleanedLines() as $line) {
+        foreach (InputReader::cleanedLines(__DIR__) as $line) {
             list ($them, $us) = explode(' ', $line, 2);
             $them = $key[$them];
             $us = $key[$us];
@@ -100,7 +92,7 @@ class Main
             'Z' => 'WIN',
         ];
         
-        foreach (self::cleanedLines() as $line) {
+        foreach (InputReader::cleanedLines(__DIR__) as $line) {
             list ($them, $outcome) = explode(' ', $line, 2);
             $them = $themKey[$them];
             $us = self::shapeFor($them, $outcomeKey[$outcome]);

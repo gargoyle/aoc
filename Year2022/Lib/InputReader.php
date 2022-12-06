@@ -24,7 +24,7 @@ class InputReader
         
         if ($fp === false) { die("Failed to open input file: " . $filename); }
         while ($line = fgets($fp)) {
-            yield trim($line);
+            yield rtrim($line);
         }
     }
 }

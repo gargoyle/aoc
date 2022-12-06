@@ -27,4 +27,10 @@ class InputReader
             yield rtrim($line);
         }
     }
+    
+    public static function entireContents(string $directory): string
+    {
+        $filename = $directory . DIRECTORY_SEPARATOR . self::FILENAME;
+        return file_get_contents($filename);
+    }
 }

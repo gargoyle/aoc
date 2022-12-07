@@ -31,10 +31,11 @@ class Main
         $input = \Year2022\Lib\InputReader::cleanedLines(__DIR__);
         $fs = new Filesystem($input);
         $target = 30000000;
-       
+        $freeSpace = $fs->freeSpace();
+        
         $smallestDirToReachTarget = null; 
         foreach ($fs->flat() as $item) {
-            $willReachTarget = (($fs->freeSpace() + $item->size()) >= $target);
+            $willReachTarget = (($freeSpace + $item->size()) >= $target);
             if (($item instanceof Directory) && $willReachTarget) {
                 if ($smallestDirToReachTarget == null) {
                     $smallestDirToReachTarget = $item;

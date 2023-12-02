@@ -5,7 +5,7 @@ spl_autoload_register(function ($className) {
     $base = dirname(__DIR__) . '/';
 
     $file = $base
-            . str_replace('\\', '/', $className)
+            . str_replace(['\\','Year'], ['/',''], $className)
             . '.php';
 
     if (file_exists($file)) {
@@ -25,7 +25,7 @@ if ($customDay) {
     define('MAXDAY', date('d'));
     define('MINDAY', 1);
 }
-define('YEAR', date('Y'));
+define('YEAR', '2022');
 
 system('figlet AoC 2022');
 for ($d = MINDAY; $d <= MAXDAY; $d++) {
